@@ -1,4 +1,4 @@
-# dolby-vision-for-windows
+# DVFW (Dolby Vision For Windows)
 
 This github repo was made so anyone can contribute to get Dolby Vision working on PCs
 
