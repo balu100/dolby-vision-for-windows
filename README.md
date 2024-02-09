@@ -19,4 +19,6 @@ Current best known guide:
 11. Import the edited bin file (fixeddolbyvisionmonitor.bin)
 12. Run Restart64.exe/Restart.exe inside of the cru folder
 
+Uploaded mine [fixeddolbyvisionmonitor.bin](https://github.com/balu100/dolby-vision-for-windows/raw/main/fixeddolbyvisionmonitor.bin) so you only need to do 10-12 steps (LG C1)
+
 [Thanks to dogelition](https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16314256](https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16297672)https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16297672)
