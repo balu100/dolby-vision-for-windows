@@ -21,7 +21,7 @@ Current best known guide:
 
 Uploaded mine [fixeddolbyvisionmonitor.bin](https://github.com/balu100/dolby-vision-for-windows/raw/main/fixeddolbyvisionmonitor.bin) so you only need to do 10-12 steps (LG C1)
 
-https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/app.png
-https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/displaysettings.png
+![alt text](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/app.png)
+![alt text](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/displaysettings.png)
 
 [Thanks to dogelition](https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16314256](https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16297672)https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16297672)
