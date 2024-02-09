@@ -4,7 +4,7 @@ This github repo was made so anyone can contribute to get Dolby Vision working o
 
 Current best known guide:
 
-0. Download [dolby vision extensions](https://www.microsoft.com/en-gb/p/dolby-vision-extensions/9pltg1lwphlf) and [HEVC Video Extensions](https://apps.microsoft.com/detail/9NMZLZ57R3T7?hl=en-US&gl=US)
+0. Download [Dolby Vision Extensions](https://www.microsoft.com/en-gb/p/dolby-vision-extensions/9pltg1lwphlf) and [HEVC Video Extensions](https://apps.microsoft.com/detail/9NMZLZ57R3T7?hl=en-US&gl=US)
 1. Download [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)
 2. Open CRU
 3. Select the display from the dropdown menu
