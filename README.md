@@ -20,7 +20,18 @@ Follow these steps to enable Dolby Vision on your PC:
 6. Open AW EDID Editor.
 7. Open the exported EDID file (`dolbyvisionmonitor.bin`).
 8. Navigate to the Vendor-Specific Video section.
-9. Edit the hex string. For example, if you own an LG C1, change the hex string from `480376825e6d95` to `480377825e6d95`. If your string is different, use [VSVDB Calc](https://discourse.coreelec.org/uploads/short-url/uJlVOw1StIgxqJnJyKuGwlC57vQ.xlsm) to calculate the correct value.
+9. Edit the hex string.
+    1. Below are some known, pre-computed (`original` -> `updated`) values:
+        * `480376825e6d95` -> `480377825e6d95` (LG C1)
+        * `480a7e86607694` -> `480a7f86607694` (LG C2)
+        * `4d4e4a725a7776` -> `4d4e4b725a7776` (TCL C825)
+        * `48039e5898aa5c` -> `48039f5898aa5c` (Sony A95L)
+        * `4403609248458f` -> `4403619248458f` (unknown model of Sony Bravia)
+    1. If your hex string is not listed above, then compute it via:
+        ```shell
+        python.exe enable_dolby_vision_hdmi.py __HEX_STRING__
+        ```
+    1. (If you want to dive deeper into the hex string config, consult [dolby_vsvdb_calc.xlsm](./dolby_vsvdb_calc.xlsm) from [here](https://discourse.coreelec.org/t/edid-override-injecting-a-dolby-vsvdb-block/51510?page=1)).
 10. Save the edited EDID as a new file (e.g., `fixeddolbyvisionmonitor.bin`).
 11. Open CRU again.
 12. Import the edited EDID file (`fixeddolbyvisionmonitor.bin`).
