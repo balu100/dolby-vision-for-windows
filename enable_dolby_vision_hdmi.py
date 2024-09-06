@@ -6,7 +6,7 @@ def hex_to_int(hex: str):
 
 
 def int_to_hex(num: int):
-  return f'{num:x}'
+  return '%x' % num
 
 
 def enable_dolby_vision_hdmi(hex: str):
