@@ -37,12 +37,6 @@ Follow these steps to enable Dolby Vision on your PC:
 12. Import the edited EDID file (`fixeddolbyvisionmonitor.bin`).
 13. Run `Restart64.exe` or `Restart.exe` found in the CRU folder to apply the changes.
 
-### Pre-Edited EDID for LG C1
-
-If you own an LG C1, you can use the pre-edited EDID file and skip to steps 11-13:
-
-- [Download fixeddolbyvisionmonitor.bin](https://github.com/balu100/dolby-vision-for-windows/raw/main/fixeddolbyvisionmonitor.bin)
-
 ## Screenshots
 
 ![App Screenshot](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/app.png)
