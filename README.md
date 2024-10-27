@@ -20,7 +20,7 @@ Follow these steps to enable Dolby Vision on your PC:
 6. Open AW EDID Editor.
 7. Open the exported EDID file (`dolbyvisionmonitor.bin`).
 8. Navigate to the Vendor-Specific Video section.
-9. Edit the hex string.
+9. Edit the Payload (HEX String).
     1. Below are some known, pre-computed (`original` -> `updated`) values:
         * `480376825e6d95` -> `480377825e6d95` (LG C1)
         * `480a7e86607694` -> `480a7f86607694` (LG C2)
