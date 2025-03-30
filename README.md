@@ -2,6 +2,10 @@
 
 Welcome to the DVFW GitHub repository! This project aims to help users get Dolby Vision working on PCs. Contributions are welcome to improve and refine the process.
 
+### Updates
+
+2025.03.30 - Waiting for the new "Use Dolby Vision Mode" setting in the latest Windows 11 Insider Dev build. If it drops, I'll be sure to update the guide.
+
 ## Current Best Known Guide
 
 Follow these steps to enable Dolby Vision on your PC:
