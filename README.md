@@ -5,6 +5,7 @@ Welcome to the DVFW GitHub repository! This project aims to help users get Dolby
 ### Updates
 
 2025.03.30 - Waiting for the new "Use Dolby Vision Mode" setting in the latest Windows 11 Insider Dev build. If it drops, I'll be sure to update the guide.
+2025.04.01 - KB5053656 - [Display kernel] Fixed: This update addresses an issue affecting High Dynamic Range (HDR) content playback on Dolby Vision capable displays, where users might see regular HDR instead of Dolby Vision, missing specific content indicators.
 
 ## Current Best Known Guide
 
