@@ -8,6 +8,8 @@ Welcome to the DVFW GitHub repository! This project aims to help users get Dolby
 
 2025.03.31 - KB5053656 - [Display kernel] Fixed: This update addresses an issue affecting High Dynamic Range (HDR) content playback on Dolby Vision capable displays, where users might see regular HDR instead of Dolby Vision, missing specific content indicators.
 
+2025.04.03 [Windows Insider - Use Dolby Vision Mode](https://github.com/balu100/dolby-vision-for-windows/issues/17)
+
 
 ## Current Best Known Guide
 
