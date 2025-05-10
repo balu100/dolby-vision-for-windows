@@ -33,6 +33,7 @@ Follow these steps to enable Dolby Vision on your PC:
     1. Below are some known, pre-computed (`original` -> `updated`) values:
         * `480376825e6d95` -> `480377825e6d95` (LG C1)
         * `480a7e86607694` -> `480a7f86607694` (LG C2)
+        * `480a6e845a6d94` -> `480a6f845a6d94` (LG B2)
         * `4d4e4a725a7776` -> `4d4e4b725a7776` (TCL C825)
         * `48039e5898aa5c` -> `48039f5898aa5c` (Sony A95L)
         * `4403609248458f` -> `4403619248458f` (unknown model of Sony Bravia)
