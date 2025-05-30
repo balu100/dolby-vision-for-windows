@@ -88,7 +88,7 @@ We'll use a more comprehensive tool, `VsvdbInfo.py` (available in this repositor
         *   **`Min Display Luminance Index`**: Should be a low value, appropriate for your display's black level (e.g., 0.0 nits, 0.001 nits, 0.005 nits).
         *   **`Color Primary Coordinate Bits` (Gx, Gy, Rx, Ry, Bx, By)**: These define the color gamut. While Max Luminance is often the first blocker, incorrect gamut information could also cause issues. You can compare these to known presets like the "BT.2020_Example" in `VsvdbInfo.py` if problems persist after fixing luminance.
 
-4.  **Modify Fields if Necessary:**
+4.  **Modify Fields if Necessary(Should be avoided, use only if all else fails.):**
     *   If you identify an incorrect field (especially Max Display Luminance or DV Mode Bits), use option "2. Modify VSVDB Fields" in `VsvdbInfo.py`.
     *   Select the field to change and enter the correct value/choice.
     *   After modification, choose option "3. Show Raw Hex Payload" and **copy this new hex string.**
