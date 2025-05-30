@@ -1,25 +1,25 @@
 import sys
 
-def hex_to_int(hex: str) -> int:
+def hex_to_int(hex_str: str) -> int:
     """Convert a hexadecimal string to an integer."""
-    return int(hex, 16)
+    return int(hex_str, 16)
 
 def int_to_hex(num: int) -> str:
     """Convert an integer to a 2-character hexadecimal string."""
     return f'{num:02x}'
 
-def enable_dolby_vision_hdmi(hex: str) -> str:
+def enable_dolby_vision_hdmi(hex_str: str) -> str:
     """
     Enable Dolby Vision HDMI by modifying the appropriate byte in a 14-character
     hexadecimal string.
     """
-    if len(hex) != 14 or not all(c in '0123456789abcdefABCDEF' for c in hex):
-        raise ValueError("Input must be a 14-character hexadecimal string.")
+    if len(hex_str) != 14 or not all(c in '0123456789abcdefABCDEF' for c in hex_str):
+        raise ValueError("Error: Input must be a 14-character hexadecimal string.")
     
     hex_chunks_index = 2  # Index of the Dolby Vision value in the chunks
 
     # Split into chunks of 2 characters
-    hex_chunks = [hex[i : i + 2] for i in range(0, len(hex), 2)]
+    hex_chunks = [hex_str[i : i + 2] for i in range(0, len(hex_str), 2)]
 
     # Set the last bit to enable 'LLDV-HDMI'
     dolby_bits = hex_to_int(hex_chunks[hex_chunks_index])
@@ -46,14 +46,18 @@ def run_tests():
 
 def main():
     """Main function to handle command-line input."""
-    try:
-        video_hex = sys.argv[1]
-    except IndexError:
-        raise ValueError('No value provided for argument `video_hex`')
+    if len(sys.argv) < 2:
+        print("Error: No input provided. Please enter a 14-character hexadecimal string.")
+        sys.exit(1)
 
-    video_hex = video_hex.strip()
+    video_hex = sys.argv[1].strip()
+
+    if len(video_hex) != 14 or not all(c in '0123456789ABCDEFabcdef' for c in video_hex):
+        print("Error: Invalid hexadecimal input! Must be exactly 14 characters.")
+        sys.exit(1)
 
     new_video_hex = enable_dolby_vision_hdmi(video_hex)
+    
     if new_video_hex == video_hex:
         print(f"Warning: `video_hex` of '{video_hex}' is already enabled with LLDV-HDMI")
     else:
