@@ -52,6 +52,62 @@ Follow these steps to enable Dolby Vision on your PC:
 ![App Screenshot](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/app.png)
 ![Display Settings Screenshot](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/displaysettings.png)
 
+## Troubleshooting / Advanced Debugging
+
+If you've followed the Guide and Dolby Vision is still not working, or if the `enable_dolby_vision_hdmi.py` script reported that your hex string was "already enabled" but you don't have Dolby Vision in Windows, this section is for you.
+
+The simple LLDV-HDMI flag (toggled by `enable_dolby_vision_hdmi.py`) is necessary but often not sufficient. Other parameters within the 7-byte Dolby Vision VSVDB (Vendor Specific Video Data Block) payload are critical.
+
+We'll use a more comprehensive tool, `VsvdbInfo.py` (available in this repository), to decode, inspect, and modify your VSVDB.
+
+**Steps for Advanced Debugging:**
+
+1.  **Get Your Current VSVDB Hex String:**
+    *   If you haven't modified it yet, find this in AW EDID Editor under the "Vendor-Specific Video" section (it's the "Payload").
+    *   If you used `enable_dolby_vision_hdmi.py` and it said "already enabled," use that original hex string.
+
+2.  **Download and Run `VsvdbInfo.py`:**
+    *   Ensure you have Python installed.
+    *   Download `VsvdbInfo.py` from this repository.
+    *   Open a command prompt or terminal, navigate to where you saved the script, and run it:
+        ```shell
+        python VsvdbInfo.py
+        ```
+    *   When prompted, enter your 7-byte VSVDB hex string.
+
+3.  **Inspect Key Decoded Fields:**
+    *   Once the payload is loaded, choose option "1. Show Current VSVDB Info". Pay close attention to the following:
+        *   **`Max Display Luminance Index`**: This is CRITICAL. It shows the peak brightness your EDID is reporting.
+            *   **Problem Sign:** If this value is very low (e.g., "97 nits", "155 nits") for a display capable of much higher brightness (most HDR TVs are 400-1000+ nits), this is a likely reason DV isn't working. Windows might think your display isn't bright enough for HDR/DV.
+            *   **Typical Good Values:** For an LG OLED, this should ideally report around 700-800+ nits (e.g., Index 14 for 807 nits, Index 25 for 4060 nits if using a high value from some common EDIDs, though 807 nits is a safer bet for compatibility).
+        *   **`DM Version Bits`**: Should typically be `3.x` or `4.x`.
+        *   **`DV Mode Bits`**: Ensure this reflects a valid mode, including LLDV if that's your goal (e.g., "Std + LLDV + LLDV-HDMI" or "LLDV + LLDV-HDMI").
+        *   **`Min Display Luminance Index`**: Should be a low value, appropriate for your display's black level (e.g., 0.001 nits, 0.005 nits).
+        *   **`Color Primary Coordinate Bits` (Gx, Gy, Rx, Ry, Bx, By)**: These define the color gamut. While the Max Luminance is often the first blocker, incorrect gamut information could also cause issues. You can compare these to known presets like BT.2020 if problems persist after fixing luminance. The `VsvdbInfo.py` script has a BT.2020 preset based on common examples.
+
+4.  **Modify Fields if Necessary:**
+    *   If you identify an incorrect field (especially Max Display Luminance), use option "2. Modify VSVDB Fields" in `VsvdbInfo.py`.
+    *   Select the field to change and enter the correct value. For luminance, the script allows you to pick from a table of nits values.
+    *   After modification, the script will show the new hex payload. **Copy this new hex string.**
+
+5.  **Apply the Corrected VSVDB:**
+    *   Go back to AW EDID Editor, open your exported EDID file (`dolbyvisionmonitor.bin`).
+    *   Navigate to the Vendor-Specific Video section.
+    *   Replace the old Payload (HEX String) with your **newly generated hex string** from `VsvdbInfo.py`.
+    *   Save the edited EDID as a new file (e.g., `fixeddolbyvisionmonitor_advanced.bin`).
+    *   Open CRU, import this new EDID file, and run `Restart64.exe` (or `Restart.exe`).
+
+6.  **Test Again:** Check Windows Advanced Display Settings for Dolby Vision certification.
+
+**If Still Not Working:**
+When opening a new issue on GitHub, please include:
+*   Your original VSVDB hex string.
+*   The **full decoded output** from `VsvdbInfo.py` for your original string.
+*   Any modifications you made and the resulting new hex string.
+*   Details about your display model, GPU, and how you are applying the EDID.
+
+This detailed information will significantly help in diagnosing the problem.
+
 ## Acknowledgements
 
 - Special thanks to [dogelition](https://linustechtips.com/topic/1145733-get-dolby-vision-instead-of-hdr10-on-windows-10/?do=findComment&comment=16314256) for the initial guide.
