@@ -63,8 +63,11 @@ We'll use a more comprehensive tool, `VsvdbInfo.py` (available in this repositor
 **Steps for Advanced Debugging:**
 
 1.  **Get Your Current VSVDB Hex String:**
-    *   If you haven't modified it yet, find this in AW EDID Editor under the "Vendor-Specific Video" section (it's the "Payload").
-    *   If you used `enable_dolby_vision_hdmi.py` and it said "already enabled," use that original hex string.
+    *   If you haven't modified it yet, find this in AW EDID Editor:
+        1.  Export your display's active EDID using CRU (see "Verifying the Active EDID in Windows" below if unsure how).
+        2.  Open the exported `.bin` file in AW EDID Editor.
+        3.  Navigate to the "CEA Extension" block, then find the "Vendor-Specific Video" data block that has an **IEEE OUI of `53318` (decimal) / `00-D0-46` (hex)**. The "Payload (HEX String)" associated with this Dolby OUI is what you need. (Example: [link to the screenshot if you add it to your repo])
+    *   If you used `enable_dolby_vision_hdmi.py` and it said "already enabled," use that original hex string (but still verify its OUI as above if you encounter issues).
 
 2.  **Download and Run `VsvdbInfo.py`:**
     *   Ensure you have Python installed.
@@ -73,38 +76,66 @@ We'll use a more comprehensive tool, `VsvdbInfo.py` (available in this repositor
         ```shell
         python VsvdbInfo.py
         ```
-    *   When prompted, enter your 7-byte VSVDB hex string.
+    *   When prompted, enter your 7-byte VSVDB hex string. The script will remind you to ensure this payload corresponds to the Dolby OUI (`53318` decimal / `00-D0-46` hex).
 
 3.  **Inspect Key Decoded Fields:**
     *   Once the payload is loaded, choose option "1. Show Current VSVDB Info". Pay close attention to the following:
         *   **`Max Display Luminance Index`**: This is CRITICAL. It shows the peak brightness your EDID is reporting.
             *   **Problem Sign:** If this value is very low (e.g., "97 nits", "155 nits") for a display capable of much higher brightness (most HDR TVs are 400-1000+ nits), this is a likely reason DV isn't working. Windows might think your display isn't bright enough for HDR/DV.
-            *   **Typical Good Values:** For an LG OLED, this should ideally report around 700-800+ nits (e.g., Index 14 for 807 nits, Index 25 for 4060 nits if using a high value from some common EDIDs, though 807 nits is a safer bet for compatibility).
+            *   **Typical Good Values:** For an LG OLED, this should ideally report around 700-800+ nits (e.g., Index 14 for 807 nits). Index 25 (4060 nits) is seen in some EDIDs but might be less compatible than a more conservative, realistic value like 807 nits.
         *   **`DM Version Bits`**: Should typically be `3.x` or `4.x`.
-        *   **`DV Mode Bits`**: Ensure this reflects a valid mode, including LLDV if that's your goal (e.g., "Std + LLDV + LLDV-HDMI" or "LLDV + LLDV-HDMI").
-        *   **`Min Display Luminance Index`**: Should be a low value, appropriate for your display's black level (e.g., 0.001 nits, 0.005 nits).
-        *   **`Color Primary Coordinate Bits` (Gx, Gy, Rx, Ry, Bx, By)**: These define the color gamut. While the Max Luminance is often the first blocker, incorrect gamut information could also cause issues. You can compare these to known presets like BT.2020 if problems persist after fixing luminance. The `VsvdbInfo.py` script has a BT.2020 preset based on common examples.
+        *   **`DV Mode Bits`**: Ensure this reflects a valid mode. For PC Dolby Vision, you typically want a mode that includes "LLDV-HDMI" (e.g., "Std + LLDV + LLDV-HDMI" which is `0b11`, or "LLDV + LLDV-HDMI" which is `0b01`). The default `VsvdbInfo.py` example payload `480376825e6d95` has "Std + LLDV" (`0b10`) and would need this bit toggled for PC LLDV-HDMI (e.g., to `0b11`, making its byte 3 `0x77` instead of `0x76`).
+        *   **`Min Display Luminance Index`**: Should be a low value, appropriate for your display's black level (e.g., 0.0 nits, 0.001 nits, 0.005 nits).
+        *   **`Color Primary Coordinate Bits` (Gx, Gy, Rx, Ry, Bx, By)**: These define the color gamut. While Max Luminance is often the first blocker, incorrect gamut information could also cause issues. You can compare these to known presets like the "BT.2020_Example" in `VsvdbInfo.py` if problems persist after fixing luminance.
 
 4.  **Modify Fields if Necessary:**
-    *   If you identify an incorrect field (especially Max Display Luminance), use option "2. Modify VSVDB Fields" in `VsvdbInfo.py`.
-    *   Select the field to change and enter the correct value. For luminance, the script allows you to pick from a table of nits values.
-    *   After modification, the script will show the new hex payload. **Copy this new hex string.**
+    *   If you identify an incorrect field (especially Max Display Luminance or DV Mode Bits), use option "2. Modify VSVDB Fields" in `VsvdbInfo.py`.
+    *   Select the field to change and enter the correct value/choice.
+    *   After modification, choose option "3. Show Raw Hex Payload" and **copy this new hex string.**
 
 5.  **Apply the Corrected VSVDB:**
-    *   Go back to AW EDID Editor, open your exported EDID file (`dolbyvisionmonitor.bin`).
-    *   Navigate to the Vendor-Specific Video section.
-    *   Replace the old Payload (HEX String) with your **newly generated hex string** from `VsvdbInfo.py`.
+    *   Go back to AW EDID Editor, open your original exported EDID file (e.g., `dolbyvisionmonitor.bin`).
+    *   Navigate to the Vendor-Specific Video section with Dolby's OUI (`53318` decimal / `00-D0-46` hex).
+    *   Replace the old "Payload (HEX String)" with your **newly generated hex string** from `VsvdbInfo.py`.
     *   Save the edited EDID as a new file (e.g., `fixeddolbyvisionmonitor_advanced.bin`).
-    *   Open CRU, import this new EDID file, and run `Restart64.exe` (or `Restart.exe`).
+    *   Open CRU, import this new EDID file for your display, and run `Restart64.exe` (or `Restart.exe`).
 
 6.  **Test Again:** Check Windows Advanced Display Settings for Dolby Vision certification.
 
-**If Still Not Working:**
+### Verifying the Active EDID in Windows
+
+If your `VsvdbInfo.py` output looks correct (good luminance, correct DV mode) but Dolby Vision still isn't activating, it's critical to verify that the EDID Windows is *currently* using actually contains your intended changes.
+
+1.  **Export the Active EDID:**
+    *   Open **Custom Resolution Utility (CRU)**.
+    *   Select your target display (e.g., your LG TV) from the dropdown menu.
+    *   Click the **"Export..."** button and save the EDID as a `.bin` file (e.g., `MyCurrentActiveEDID.bin`). This file contains the raw data of the EDID Windows is using for that display *at this moment*.
+
+2.  **Inspect the Exported EDID:**
+    *   Open this `MyCurrentActiveEDID.bin` file using **AW EDID Editor**.
+    *   Navigate to the "CEA Extension" block.
+    *   Find the "Vendor-Specific Video" data block associated with **IEEE OUI `53318` (decimal) / `00-D0-46` (hex)**.
+    *   Check its "Payload (HEX String)".
+
+3.  **Compare:**
+    *   Does this payload match the corrected hex string you intended to apply?
+    *   If it doesn't match, your EDID override with the corrected VSVDB was not successfully applied or Windows has reverted to a different EDID.
+    *   **Troubleshooting Application Issues:**
+        *   In CRU, ensure your *intended* EDID file (with the corrected VSVDB) is the one you imported for that display. Make sure no other conflicting EDID overrides are active for this display in CRU.
+        *   Try using `reset-all.exe` from the CRU folder (this removes ALL CRU overrides for ALL displays), then **reboot your PC**.
+        *   After rebooting, open CRU and *only* import your corrected EDID for the target display.
+        *   Run `restart64.exe` (or `restart.exe`) from the CRU folder.
+        *   Export the active EDID again as in step 1 and re-verify.
+
+### If Still Not Working
+
 When opening a new issue on GitHub, please include:
-*   Your original VSVDB hex string.
-*   The **full decoded output** from `VsvdbInfo.py` for your original string.
+*   Your display model and GPU model/driver version.
+*   How you are applying the EDID (e.g., CRU version).
+*   Your original VSVDB hex string (from the Dolby OUI `53318` / `00-D0-46`).
+*   The **full decoded output** from `VsvdbInfo.py` for this original string.
 *   Any modifications you made and the resulting new hex string.
-*   Details about your display model, GPU, and how you are applying the EDID.
+*   Confirmation if you have verified your *active* EDID (as per the section above) and whether its Dolby VSVDB payload matches your intended string.
 
 This detailed information will significantly help in diagnosing the problem.
 
