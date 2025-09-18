@@ -54,7 +54,7 @@ Follow these steps to enable Dolby Vision on your PC:
 ![App Screenshot](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/app.png)
 ![Display Settings Screenshot](https://raw.githubusercontent.com/balu100/dolby-vision-for-windows/main/displaysettings.png)
 
-## Troubleshooting / Advanced Debugging
+## Troubleshooting / Advanced Debugging (in alpha!)
 
 If you've followed the Guide and Dolby Vision is still not working, or if the `enable_dolby_vision_hdmi.py` script reported that your hex string was "already enabled" but you don't have Dolby Vision in Windows, this section is for you.
 
