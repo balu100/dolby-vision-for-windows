@@ -10,6 +10,8 @@ Welcome to the DVFW GitHub repository! This project aims to help users get Dolby
 
 2025.04.03 [Windows Insider - Use Dolby Vision Mode](https://github.com/balu100/dolby-vision-for-windows/issues/17)
 
+2025.09.18 The only TV currently reported as working system-wide with Dolby Vision is the LG C3 [source](https://github.com/balu100/dolby-vision-for-windows/issues/24)
+
 
 ## Current Best Known Guide
 
