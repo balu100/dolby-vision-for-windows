@@ -2,15 +2,22 @@
 
 Welcome to the DVFW GitHub repository! This project aims to help users get Dolby Vision working on PCs. Contributions are welcome to improve and refine the process.
 
-### Updates
+## Updates
 
-2025.03.30 - Waiting for the new "Use Dolby Vision Mode" setting in the latest Windows 11 Insider Dev build. If it drops, I'll be sure to update the guide.
+### Latest
+- 2026-04-01 VSVDB v1 has been unreliable in testing, while VSVDB v2 has worked much more consistently. Right now, the Windows Dolby Vision toggle does not seem to work for us, but I am still tracking it for testing here: [issue #17](https://github.com/balu100/dolby-vision-for-windows/issues/17). The same goes for the VSVDB v1 issue, which I am tracking here: [issue #45]([https://github.com/balu100/dolby-vision-for-windows/issues/41](https://github.com/balu100/dolby-vision-for-windows/issues/45)). I also made a web tool that can inspect Dolby VSVDB/CTA data and apply the same changes as the Python script: https://dvfw.netlify.app/
 
-2025.03.31 - KB5053656 - [Display kernel] Fixed: This update addresses an issue affecting High Dynamic Range (HDR) content playback on Dolby Vision capable displays, where users might see regular HDR instead of Dolby Vision, missing specific content indicators.
+<details>
+<summary>Older updates</summary>
 
-2025.04.03 [Windows Insider - Use Dolby Vision Mode](https://github.com/balu100/dolby-vision-for-windows/issues/17)
+- 2025.03.30 - Waiting for the new "Use Dolby Vision Mode" setting in the latest Windows 11 Insider Dev build. If it drops, I'll be sure to update the guide.
 
-2025.09.18 The only TV currently reported as working system-wide with Dolby Vision is the LG C3 [source](https://github.com/balu100/dolby-vision-for-windows/issues/24)
+- 2025.03.31 - KB5053656 - [Display kernel] Fixed: This update addresses an issue affecting High Dynamic Range (HDR) content playback on Dolby Vision capable displays, where users might see regular HDR instead of Dolby Vision, missing specific content indicators.
+
+- 2025.04.03 [Windows Insider - Use Dolby Vision Mode](https://github.com/balu100/dolby-vision-for-windows/issues/17)
+
+- 2025.09.18 The only TV currently reported as working system-wide with Dolby Vision is the LG C3 [source](https://github.com/balu100/dolby-vision-for-windows/issues/24)
+</details>
 
 
 ## Current Best Known Guide
