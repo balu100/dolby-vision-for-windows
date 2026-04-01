@@ -30,7 +30,8 @@ Follow these steps to enable Dolby Vision on your PC:
 5. Download [AW EDID Editor](https://www.analogway.com/emea/products/software-tools/aw-edid-editor/).
 6. Open AW EDID Editor.
 7. Open the exported EDID file (`dolbyvisionmonitor.bin`).
-8. Navigate to the Vendor-Specific Video section.
+8. Under CEA Extension, navigate to the Vendor-Specific Video section with a matching "IEEE OUI" of 53318, this is the Dolby OUI.
+    * if you can't find a Vendor-Specific Video section with a matching IEEE OUI value, it may be the case that your display does not support Dolby Vision
 9. Edit the Payload (HEX String).
     1. Below are some known, pre-computed (`original` -> `updated`) values:
         * `480376825e6d95` -> `480377825e6d95` (LG C1)
