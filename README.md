@@ -5,7 +5,7 @@ Welcome to the DVFW GitHub repository! This project aims to help users get Dolby
 ## Updates
 
 ### Latest
-- 2026-04-01 VSVDB v1 has been unreliable in testing, while VSVDB v2 has worked much more consistently. Right now, the Windows Dolby Vision toggle does not seem to work for us, but I am still tracking it for testing here: [issue #17](https://github.com/balu100/dolby-vision-for-windows/issues/17). The same goes for the VSVDB v1 issue, which I am tracking here: [issue #45]([https://github.com/balu100/dolby-vision-for-windows/issues/41](https://github.com/balu100/dolby-vision-for-windows/issues/45)). I also made a web tool that can inspect Dolby VSVDB/CTA data and apply the same changes as the Python script: https://dvfw.netlify.app/
+- 2026-04-01 VSVDB v1 has been unreliable in testing, while VSVDB v2 has worked much more consistently. Right now, the Windows Dolby Vision toggle does not seem to work for us, but I am still tracking it for testing here: [issue #17](https://github.com/balu100/dolby-vision-for-windows/issues/17). The same goes for the VSVDB v1 issue, which I am tracking here: [issue #45](https://github.com/balu100/dolby-vision-for-windows/issues/41]). I also made a web tool that can inspect Dolby VSVDB/CTA data and apply the same changes as the Python script: https://dvfw.netlify.app/
 
 <details>
 <summary>Older updates</summary>
