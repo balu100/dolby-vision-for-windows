@@ -47,6 +47,7 @@ Follow these steps to enable Dolby Vision on your PC:
         * `4d4e4a725a7776` -> `4d4e4b725a7776` (TCL C825)
         * `48039e5898aa5c` -> `48039f5898aa5c` (Sony A95L)
         * `4403609248458f` -> `4403619248458f` (unknown model of Sony Bravia)
+        * `480362746a7f7c` -> `480363746a7f7c` (Hisense U8GQ)
     1. If your hex string is not listed above, then compute it via:
         ```shell
         python.exe enable_dolby_vision_hdmi.py __HEX_STRING__
